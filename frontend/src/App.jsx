@@ -10,6 +10,7 @@ import Dashboard from "./pages/Dashboard";
 import SignIn from "./pages/SignIn";
 import Home from "./pages/Home";
 import Header from "./partials/Header";
+import MyProfile from "./pages/MyProfile";
 
 function App() {
   const location = useLocation();
@@ -25,7 +26,8 @@ function App() {
       <Header />
       <Routes>
         <Route exact path="/" element={<Home />} />
-        <Route exact path="/analytics" element={<Dashboard />} />
+        <Route exact path="/userprofile" element={<MyProfile />} />
+        <Route exact path="/dashboard" element={<Dashboard />} />
         <Route exact path="/signin" element={<SignIn />} />
       </Routes>
     </div>

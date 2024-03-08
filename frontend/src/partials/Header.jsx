@@ -47,24 +47,12 @@ function Header({ sidebarOpen, setSidebarOpen }) {
                 <button
                   className="inline-flex justify-center items-center group mr-4"
                   onClick={() => {
-                    navigate("/");
+                    navigate("/dashboard");
                   }}
                 >
                   <div className="flex items-center truncate">
                     <span className="truncate ml-2 text-sm font-medium dark:text-slate-300 group-hover:text-slate-800 dark:group-hover:text-slate-200">
-                      Analytics
-                    </span>
-                  </div>
-                </button>
-                <button
-                  className="inline-flex justify-center items-center group mr-4"
-                  onClick={() => {
-                    navigate("/");
-                  }}
-                >
-                  <div className="flex items-center truncate">
-                    <span className="truncate ml-2 text-sm font-medium dark:text-slate-300 group-hover:text-slate-800 dark:group-hover:text-slate-200">
-                      Recommendation
+                      Dashboard
                     </span>
                   </div>
                 </button>
