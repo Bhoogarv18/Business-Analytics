@@ -1,6 +1,6 @@
 import React, { useState, Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
-import { addUserEmailToProduct } from '@/lib/actions';
+// import { addUserEmailToProduct } from '@/lib/actions';
 
 const Modal = ({ productId }) => {
   let [isOpen, setIsOpen] = useState(true);
@@ -11,7 +11,7 @@ const Modal = ({ productId }) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    await addUserEmailToProduct(productId, email);
+    // await addUserEmailToProduct(productId, email);
 
     setIsSubmitting(false);
     setEmail('');
@@ -37,14 +37,14 @@ const Modal = ({ productId }) => {
               enterTo="opacity-100"
               leave="ease-in duration-200"
               leaveFrom="opacity-100"
-              leaveTo="opacity-0"
+              leaveTo="opacity-0"g
             >
               <Dialog.Overlay className="fixed inset-0" />
             </Transition.Child>
 
             <span className="inline-block h-screen align-middle" aria-hidden="true" />
 
-            <Transition.Child
+            {/* <Transition.Child
               enter="ease-out duration-300"
               enterFrom="opacity-0 scale-95"
               enterTo="opacity-100 scale-100"
@@ -113,7 +113,7 @@ const Modal = ({ productId }) => {
                   </button>
                 </form>
               </div>
-            </Transition.Child>
+            </Transition.Child> */}
           </div>
         </Dialog>
       </Transition>

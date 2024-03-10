@@ -11,16 +11,17 @@ const Home = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       const fetchedProducts = await getAllProducts();
+      console.log("hello");
       setAllProducts(fetchedProducts);
     };
     fetchProducts();
   }, []);
 
   return (
-    <div className={`px-6 md:px-40 ${currentTheme==='light' ? "bg-white" : ""}`}>
-      <section
-        className={`py-6`}
-      >
+    <div
+      className={`px-6 md:px-40 ${currentTheme === "light" ? "bg-white" : ""}`}
+    >
+      <section className={`py-6`}>
         <div className="flex max-xl:flex-col gap-16">
           <div className="flex flex-col justify-center">
             <p className="flex gap-2 text-sm font-medium text-primary;">
@@ -50,7 +51,7 @@ const Home = () => {
         </div>
       </section>
 
-      {allProducts.length>0 && (
+      {allProducts.length > 0 && (
         <section className="trending-section">
           <h2 className="section-text">Trending</h2>
           <div className="flex flex-wrap gap-x-8 gap-y-16">

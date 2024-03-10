@@ -1,11 +1,14 @@
-import React from 'react';
+import React from "react";
 
 const ProductCard = ({ product }) => {
   return (
-    <a href={`/products/${product._id}`} className="sm:w-[292px] sm:max-w-[292px] w-full flex-1 flex flex-col gap-4 rounded-md;">
+    <a
+      href={`/products/${product._id}`}
+      className="sm:w-[292px] sm:max-w-[292px] w-full flex-1 flex flex-col gap-4 rounded-md;"
+    >
       <div className="flex-1 relative flex flex-col gap-5 p-4 rounded-md;">
-        <img 
-          src={product.image}
+        <img
+          src={product.picture}
           alt={product.title}
           width={200}
           height={200}
@@ -14,7 +17,9 @@ const ProductCard = ({ product }) => {
       </div>
 
       <div className="flex flex-col gap-3">
-        <h3 className="text-secondary text-xl leading-6 font-semibold truncate;">{product.title}</h3>
+        <h3 className="text-secondary text-xl leading-6 font-semibold truncate;">
+          {product.title}
+        </h3>
 
         <div className="flex justify-between">
           <p className="text-black opacity-50 text-lg capitalize">
@@ -22,8 +27,8 @@ const ProductCard = ({ product }) => {
           </p>
 
           <p className="text-black text-lg font-semibold">
-            <span>{product?.currency}</span>
-            <span>{product?.currentPrice}</span>
+            <span>₹</span>
+            <span>{product?.price}</span>
           </p>
         </div>
       </div>
