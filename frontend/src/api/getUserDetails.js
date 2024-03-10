@@ -1,10 +1,9 @@
-export async function getAllProducts() {
+export async function getUserDetails() {
   const user_id = localStorage.getItem("userId");
   const requestOptions = {
     method: "GET",
   };
-  // const url = "http://localhost:5000/product_details";
-  const url = `http://localhost:5000/userProducts/${user_id}`;
+  const url = `http://localhost:5000/users/${user_id}`;
   try {
     const response = await fetch(url, requestOptions);
     const jsonResponse = await response.json();

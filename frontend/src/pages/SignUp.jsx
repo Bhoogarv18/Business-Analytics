@@ -15,8 +15,9 @@ import FormLabel from "@mui/joy/FormLabel";
 import Input from "@mui/joy/Input";
 import Link from "@mui/joy/Link";
 import { login } from "../api/login";
+import { signUp } from "../api/signUp";
 
-export default function SignIn() {
+export default function SignUp() {
   const { currentTheme, changeCurrentTheme } = useThemeProvider();
   const navigate = useNavigate();
   const [bannerOpen, setBannerOpen] = useState(false);
@@ -27,7 +28,7 @@ export default function SignIn() {
         <div className="fixed bottom-0 right-0 w-full md:bottom-8 md:right-12 md:w-auto z-50">
           <div className="bg-slate-800 border border-transparent dark:border-slate-700 text-slate-50 text-sm p-3 md:rounded shadow-lg flex justify-between">
             <div className="text-slate-500 inline-flex">
-              Invalid Login Credentials
+              Password does not match!
             </div>
             <button
               className="text-slate-500 hover:text-slate-400 pl-2 ml-3 border-l border-gray-700"
@@ -135,31 +136,63 @@ export default function SignIn() {
                   const data = {
                     emailid: formElements.email.value,
                     password: formElements.password.value,
+                    description: formElements.description.value,
+                    address: formElements.address.value,
+                    name: formElements.name.value,
+                    phone_number: formElements.contact.value,
+                    username: formElements.username.value,
                   };
-                  login(data).then((res) => {
-                    if (res === 200) {
-                      navigate("/");
-                    } else {
-                      console.log("login error");
-                      setBannerOpen(true);
-                    }
-                  });
+                  if (data.password !== formElements.confirmPassword.value) {
+                    setBannerOpen(true);
+                  } else {
+                    signUp(data).then((res) => {
+                      if (res === 201) {
+                        navigate("/");
+                      } else {
+                        setBannerOpen(true);
+                      }
+                    });
+                  }
                 }}
               >
+                <FormControl required>
+                  <FormLabel>Full Name</FormLabel>
+                  <Input type="text" name="username" />
+                </FormControl>
                 <FormControl required>
                   <FormLabel>Email</FormLabel>
                   <Input type="email" name="email" />
                 </FormControl>
                 <FormControl required>
+                  <FormLabel>Company Name</FormLabel>
+                  <Input type="text" name="name" />
+                </FormControl>
+                <FormControl required>
+                  <FormLabel>Address</FormLabel>
+                  <Input type="text" name="address" />
+                </FormControl>
+                <FormControl required>
+                  <FormLabel>Bio</FormLabel>
+                  <Input type="text" name="description" />
+                </FormControl>
+                <FormControl required>
+                  <FormLabel>Contact Number</FormLabel>
+                  <Input type="number" name="contact" />
+                </FormControl>
+                <FormControl required>
                   <FormLabel>Password</FormLabel>
                   <Input type="password" name="password" />
                 </FormControl>
+                <FormControl required>
+                  <FormLabel>Confirm Password</FormLabel>
+                  <Input type="password" name="confirmPassword" />
+                </FormControl>
                 <Stack gap={4} sx={{ mt: 2 }}>
-                  <Link level="title-sm" href="/signup">
-                    New User?
+                  <Link level="title-sm" href="/signin">
+                    Exsiting User?
                   </Link>
                   <Button type="submit" fullWidth>
-                    Sign in
+                    Sign Up
                   </Button>
                 </Stack>
               </form>

@@ -8,13 +8,13 @@ import ThemeToggle from "../components/ThemeToggle";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 import UserAvatar from "../images/user-avatar-32.png";
-import { Stack } from "@mui/joy";
+import { Link, Stack } from "@mui/joy";
 
 function Header({ sidebarOpen, setSidebarOpen }) {
   const [searchModalOpen, setSearchModalOpen] = useState(false);
   const navigate = useNavigate();
   const path = useLocation().pathname;
-  if (path != "/signin") {
+  if (path != "/signin" && path != "/signup") {
     return (
       <header className="sticky top-0 bg-white dark:bg-[#182235] border-b border-slate-200 dark:border-slate-700 z-30">
         <div className="px-4 sm:px-6 lg:px-8">
@@ -61,7 +61,7 @@ function Header({ sidebarOpen, setSidebarOpen }) {
 
             {/* Header: Right side */}
             <div className="flex items-center space-x-3">
-              <div>
+              {/* <div>
                 <button
                   className={`w-8 h-8 flex items-center justify-center bg-slate-100 hover:bg-slate-200 dark:bg-slate-700 dark:hover:bg-slate-600/80 rounded-full ml-3 ${
                     searchModalOpen && "bg-slate-200"
@@ -94,13 +94,23 @@ function Header({ sidebarOpen, setSidebarOpen }) {
                   modalOpen={searchModalOpen}
                   setModalOpen={setSearchModalOpen}
                 />
-              </div>
-              <Notifications align="right" />
-              <Help align="right" />
+              </div> */}
+              {/* <Notifications align="right" /> */}
+              {/* <Help align="right" /> */}
               <ThemeToggle />
               {/*  Divider */}
               <hr className="w-px h-6 bg-slate-200 dark:bg-slate-700 border-none" />
-              <UserMenu align="right" />
+              {/* <UserMenu align="right" /> */}
+              <Link
+                className="font-medium text-sm text-indigo-500 hover:text-indigo-600 dark:hover:text-indigo-400 flex items-center py-1 px-3"
+                to="/signin"
+                onClick={() => {
+                  localStorage.removeItem("userId");
+                  navigate("/signin");
+                }}
+              >
+                Sign Out
+              </Link>
             </div>
           </div>
         </div>
