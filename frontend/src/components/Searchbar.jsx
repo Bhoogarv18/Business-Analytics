@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { addProduct } from "../api/addProduct";
 
 const isValidAmazonProductURL = (url) => {
   try {
@@ -6,6 +7,7 @@ const isValidAmazonProductURL = (url) => {
     const hostname = parsedURL.hostname;
 
     if (
+      hostname.includes("amazon.in") ||
       hostname.includes("amazon.com") ||
       hostname.includes("amazon.") ||
       hostname.endsWith("amazon")
@@ -19,7 +21,7 @@ const isValidAmazonProductURL = (url) => {
   return false;
 };
 
-const Searchbar = () => {
+const Searchbar = ({refresh}) => {
   const [searchPrompt, setSearchPrompt] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -32,18 +34,14 @@ const Searchbar = () => {
 
     try {
       setIsLoading(true);
-
-      // Scrape the product page
-      // Note: If `scrapeAndStoreProduct` is a client-side function,
-      // make sure it's imported and available in the client-side code.
-      // For example, you can conditionally import it based on the environment.
-
-      // import { scrapeAndStoreProduct } from '@/lib/actions';
-      // const product = await scrapeAndStoreProduct(searchPrompt);
+      console.log("scraping...");
+      await addProduct(searchPrompt);
+      console.log("scraped!!");
     } catch (error) {
       console.log(error);
     } finally {
       setIsLoading(false);
+      refresh();
     }
   };
 

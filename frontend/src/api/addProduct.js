@@ -11,7 +11,7 @@ export async function addProduct(product_url) {
     body: JSON.stringify(data),
     headers: headers,
   };
-  const url = "http://localhost:5000/product_details";
+  const url = "http://localhost:5000/product_details_scrape";
   try {
     const response = await fetch(url, requestOptions);
     const jsonResponse = await response.json();

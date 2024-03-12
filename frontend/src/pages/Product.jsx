@@ -3,6 +3,8 @@ import PriceInfoCard from "../components/PriceInfoCard";
 import ProductCard from "../components/ProductCard";
 import { useNavigate, useParams } from "react-router-dom";
 import { getProductById } from "../api/getProductById";
+import DashboardCard07 from "../partials/dashboard/DashboardCard07";
+import DashboardCard12 from "../partials/dashboard/DashboardCard12";
 
 const Product = () => {
   const { id } = useParams();
@@ -80,7 +82,7 @@ const Product = () => {
                     height={16}
                   />
                   <p className="text-sm text-secondary font-semibold">
-                    {product?.reviews.length} Reviews
+                    {product?.reviews?.length} Reviews
                   </p>
                 </div>
               </div>
@@ -93,41 +95,39 @@ const Product = () => {
                 iconSrc="/assets/icons/price-tag.svg"
                 value={`₹ ${product?.price}`}
               />
-              <PriceInfoCard
-                title="Average Price"
-                iconSrc="/assets/icons/chart.svg"
-                value={`₹
-                ${product?.average_price}`}
-              />
-              <PriceInfoCard
-                title="Highest Price"
-                iconSrc="/assets/icons/arrow-up.svg"
-                value={`₹ ${product?.highest_price}`}
-              />
-              <PriceInfoCard
-                title="Lowest Price"
-                iconSrc="/assets/icons/arrow-down.svg"
-                value={`₹ ${product?.lowest_price}`}
-              />
+              {product?.average_price && (
+                <PriceInfoCard
+                  title="Average Price"
+                  iconSrc="/assets/icons/chart.svg"
+                  value={`₹
+              ${product?.average_price}`}
+                />
+              )}
+              {product?.highest_price && (
+                <PriceInfoCard
+                  title="Highest Price"
+                  iconSrc="/assets/icons/arrow-up.svg"
+                  value={`₹ ${product?.highest_price}`}
+                />
+              )}
+              {product?.lowest_price && (
+                <PriceInfoCard
+                  title="Lowest Price"
+                  iconSrc="/assets/icons/arrow-down.svg"
+                  value={`₹ ${product?.lowest_price}`}
+                />
+              )}
             </div>
           </div>
         </div>
       </div>
-
-      <div className="flex flex-col gap-16">
-        <div className="flex flex-col gap-5">
-          <h3 className="text-2xl text-secondary font-semibold">
-            Product Description
-          </h3>
-          {console.log("details", product?.details)}
-          <div className="flex flex-col gap-4">
-            {product?.details &&
-              product?.details.map((detail) => {
-                return <p key={detail}>{detail}</p>;
-              })}
-          </div>
-        </div>
+      <div className="pt-4 pb-4">
+        {product?.details && <DashboardCard12 data={product?.details} />}
       </div>
+
+      {product?.technical_details && (
+        <DashboardCard07 data={product?.technical_details} />
+      )}
 
       {similarProducts && similarProducts?.length > 0 && (
         <div className="py-14 flex flex-col gap-2 w-full">

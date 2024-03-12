@@ -11,11 +11,14 @@ const Home = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       const fetchedProducts = await getAllProducts();
-      console.log("hello");
       setAllProducts(fetchedProducts);
     };
     fetchProducts();
   }, []);
+  const refresh = async () => {
+    const fetchedProducts = await getAllProducts();
+    setAllProducts(fetchedProducts);
+  };
 
   return (
     <div
@@ -44,7 +47,7 @@ const Home = () => {
               convert, engage, and retain more.
             </p>
 
-            <Searchbar />
+            <Searchbar refresh={refresh} />
           </div>
 
           <HeroCarousel />
@@ -53,7 +56,7 @@ const Home = () => {
 
       {allProducts.length > 0 && (
         <section className="trending-section">
-          <h2 className="section-text">Trending</h2>
+          <h2 className="section-text">All Products</h2>
           <div className="flex flex-wrap gap-x-8 gap-y-16">
             {allProducts?.map((product) => (
               <ProductCard key={product._id} product={product} />
