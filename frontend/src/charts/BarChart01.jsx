@@ -47,7 +47,7 @@ function BarChart01({
             },
             ticks: {
               maxTicksLimit: 5,
-              callback: (value) => formatValue(value),
+              // callback: (value) => formatValue(value),
               color: darkMode ? textColor.dark : textColor.light,
             },
             grid: {
@@ -55,14 +55,7 @@ function BarChart01({
             },
           },
           x: {
-            type: 'time',
-            time: {
-              parser: 'MM-DD-YYYY',
-              unit: 'month',
-              displayFormats: {
-                month: 'MMM YY',
-              },
-            },
+            type: "category", // Change to CategoryScale
             border: {
               display: false,
             },
@@ -70,6 +63,8 @@ function BarChart01({
               display: false,
             },
             ticks: {
+              autoSkipPadding: 48,
+              maxRotation: 0,
               color: darkMode ? textColor.dark : textColor.light,
             },
           },
@@ -191,9 +186,9 @@ function BarChart01({
 
   return (
     <React.Fragment>
-      <div className="px-5 py-3">
-        <ul ref={legend} className="flex flex-wrap"></ul>
-      </div>
+      {/* <div className="px-5 py-3"> */}
+        {/* <ul ref={legend} className="flex flex-wrap"></ul> */}
+      {/* </div> */}
       <div className="grow">
         <canvas ref={canvas} width={width} height={height}></canvas>
       </div>
