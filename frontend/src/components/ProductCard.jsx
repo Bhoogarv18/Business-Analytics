@@ -1,5 +1,5 @@
-import { Box } from "@mui/joy";
 import React from "react";
+import LinesEllipsis from "react-lines-ellipsis";
 
 const ProductCard = ({ product }) => {
   return (
@@ -18,22 +18,27 @@ const ProductCard = ({ product }) => {
       </div>
 
       <div className="flex flex-col gap-3">
-        <Box
+        <LinesEllipsis
+          text={product.title}
+          maxLine="2"
+          ellipsis="..."
+          trimRight
+          basedOn="letters"
           className="text-secondary text-xl leading-6 font-semibold truncate;"
-        >
-          {product.title}
-        </Box>
+        />
+        <LinesEllipsis
+          text={product.category}
+          maxLine="1"
+          ellipsis="..."
+          trimRight
+          basedOn="letters"
+          className="text-black opacity-50 text-lg capitalize"
+        />
 
-        <div className="flex justify-between">
-          <p className="text-black opacity-50 text-lg capitalize">
-            {product.category}
-          </p>
-
-          <p className="text-black text-lg font-semibold">
-            {product?.price && !product?.price.startsWith("₹") && "₹"}
-            {product?.price}
-          </p>
-        </div>
+        <p className="text-black text-lg font-semibold">
+          {product?.price && !product?.price.startsWith("₹") && "₹"}
+          {product?.price}
+        </p>
       </div>
     </a>
   );
