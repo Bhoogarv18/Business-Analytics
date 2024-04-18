@@ -1,3 +1,4 @@
+import { Box } from "@mui/joy";
 import React from "react";
 
 const ProductCard = ({ product }) => {
@@ -17,9 +18,11 @@ const ProductCard = ({ product }) => {
       </div>
 
       <div className="flex flex-col gap-3">
-        <h3 className="text-secondary text-xl leading-6 font-semibold truncate;">
+        <Box
+          className="text-secondary text-xl leading-6 font-semibold truncate;"
+        >
           {product.title}
-        </h3>
+        </Box>
 
         <div className="flex justify-between">
           <p className="text-black opacity-50 text-lg capitalize">
@@ -27,8 +30,8 @@ const ProductCard = ({ product }) => {
           </p>
 
           <p className="text-black text-lg font-semibold">
-            <span>₹</span>
-            <span>{product?.price}</span>
+            {product?.price && !product?.price.startsWith("₹") && "₹"}
+            {product?.price}
           </p>
         </div>
       </div>

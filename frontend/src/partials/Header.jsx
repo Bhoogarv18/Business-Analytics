@@ -42,8 +42,8 @@ function Header({ sidebarOpen, setSidebarOpen }) {
                   </span>
                 </div>
               </button>
-              <hr className="w-px h-6 bg-slate-200 dark:bg-slate-700 border-none" />
-              <Stack gap={1} direction="row" sx={{ marginLeft: "1rem" }}>
+              {/* <hr className="w-px h-6 bg-slate-200 dark:bg-slate-700 border-none" /> */}
+              {/* <Stack gap={1} direction="row" sx={{ marginLeft: "1rem" }}>
                 <button
                   className="inline-flex justify-center items-center group mr-4"
                   onClick={() => {
@@ -52,11 +52,11 @@ function Header({ sidebarOpen, setSidebarOpen }) {
                 >
                   <div className="flex items-center truncate">
                     <span className="truncate ml-2 text-sm font-medium dark:text-slate-300 group-hover:text-slate-800 dark:group-hover:text-slate-200">
-                      Dashboard
+                      Dashboards
                     </span>
                   </div>
                 </button>
-              </Stack>
+              </Stack> */}
             </div>
 
             {/* Header: Right side */}

@@ -5,6 +5,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import { getProductById } from "../api/getProductById";
 import DashboardCard07 from "../partials/dashboard/DashboardCard07";
 import DashboardCard12 from "../partials/dashboard/DashboardCard12";
+import DashboardCard13 from "../partials/dashboard/DashboardCard13";
+import DashboardCard10 from "../partials/dashboard/DashboardCard10";
+import { getSimilarProducts } from "../api/getSimilarProducts";
 
 const Product = () => {
   const { id } = useParams();
@@ -21,10 +24,13 @@ const Product = () => {
 
         if (!fetchedProduct) {
           navigate("/");
+        } else {
+          // const fetchedSimilarProducts = await getSimilarProducts(
+          //   fetchedProduct?.similar_products
+          // );
+          // console.log("fetched Products Similar:", fetchedSimilarProducts);
+          // setSimilarProducts(fetchedSimilarProducts);
         }
-
-        // const fetchedSimilarProducts = await getSimilarProducts(id);
-        // setSimilarProducts(fetchedSimilarProducts);
       } catch (error) {
         console.error(error);
       }
@@ -62,78 +68,35 @@ const Product = () => {
             </div>
           </div>
 
-          <div className="product-info">
-            <div className="flex flex-col gap-2">
-              <p className="text-[34px] text-secondary font-bold">
-                ₹ {product?.price}
-              </p>
-              <p className="text-[21px] text-black opacity-50 line-through">
-                ₹ {product?.original_price}
-              </p>
-            </div>
-
-            <div className="flex flex-col gap-4">
-              <div className="flex gap-3">
-                <div className="product-reviews">
-                  <img
-                    src="/assets/icons/comment.svg"
-                    alt="comment"
-                    width={16}
-                    height={16}
-                  />
-                  <p className="text-sm text-secondary font-semibold">
-                    {product?.reviews?.length} Reviews
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="my-7 flex flex-col gap-5">
-            <div className="flex gap-5 flex-wrap">
-              <PriceInfoCard
-                title="Current Price"
-                iconSrc="/assets/icons/price-tag.svg"
-                value={`₹ ${product?.price}`}
-              />
-              {product?.average_price && (
-                <PriceInfoCard
-                  title="Average Price"
-                  iconSrc="/assets/icons/chart.svg"
-                  value={`₹
-              ${product?.average_price}`}
-                />
-              )}
-              {product?.highest_price && (
-                <PriceInfoCard
-                  title="Highest Price"
-                  iconSrc="/assets/icons/arrow-up.svg"
-                  value={`₹ ${product?.highest_price}`}
-                />
-              )}
-              {product?.lowest_price && (
-                <PriceInfoCard
-                  title="Lowest Price"
-                  iconSrc="/assets/icons/arrow-down.svg"
-                  value={`₹ ${product?.lowest_price}`}
-                />
-              )}
-            </div>
-          </div>
+          <p className="text-[34px] text-secondary font-bold">
+            {product?.price && !product?.price.startsWith("₹") && "₹"}
+            {product?.price}
+          </p>
+          {product?.sentimental_score && (
+            <h1 className="mt-4 text-4xl leading-[52px] font-bold tracking-[-1.2px] text-gray-900;">
+              Sentimental Score:
+              <span className="text-primary text-red-600">
+                {product?.sentimental_score * 100} %
+              </span>
+            </h1>
+          )}
         </div>
       </div>
-      <div className="pt-4 pb-4">
+      {product?.recom && <DashboardCard13 data={product.recom} />}
+      <div className="pt-4">
         {product?.details && <DashboardCard12 data={product?.details} />}
       </div>
 
       {product?.technical_details && (
         <DashboardCard07 data={product?.technical_details} />
       )}
+      {product?.reviews && <DashboardCard10 data={product?.reviews} />}
 
       {similarProducts && similarProducts?.length > 0 && (
-        <div className="py-14 flex flex-col gap-2 w-full">
-          <p className="section-text">Similar Products</p>
+        <div className="pt-4 flex flex-col gap-2 w-full">
+          <h1 className="section-text text-4xl">Similar Products</h1>
 
-          <div className="flex flex-wrap gap-10 mt-7 w-full">
+          <div className="flex flex-wrap gap-10 w-full">
             {similarProducts.map((product) => (
               <ProductCard key={product._id} product={product} />
             ))}
