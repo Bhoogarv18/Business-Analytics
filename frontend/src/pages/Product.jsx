@@ -8,6 +8,7 @@ import DashboardCard12 from "../partials/dashboard/DashboardCard12";
 import DashboardCard13 from "../partials/dashboard/DashboardCard13";
 import DashboardCard10 from "../partials/dashboard/DashboardCard10";
 import { getSimilarProducts } from "../api/getSimilarProducts";
+import Dash from "../partials/dashboard/Dash";
 
 const Product = () => {
   const { id } = useParams();
@@ -102,6 +103,9 @@ const Product = () => {
             ))}
           </div>
         </div>
+      )}
+      {product?.similar_products && product?.similar_products.length > 0 && (
+          <Dash data={product.similar_products} />
       )}
     </div>
   );

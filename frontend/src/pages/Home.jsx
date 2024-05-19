@@ -4,6 +4,7 @@ import { getAllProducts } from "../api/getAllProducts";
 import { useThemeProvider } from "../utils/ThemeContext";
 import Searchbar from "../components/Searchbar";
 import ProductCard from "../components/ProductCard";
+import { Grid } from "@mui/joy";
 
 const Home = () => {
   const { currentTheme, changeCurrentTheme } = useThemeProvider();
@@ -58,9 +59,13 @@ const Home = () => {
         <section className="trending-section">
           <h2 className="section-text">All Products</h2>
           <div className="flex flex-wrap gap-x-8 gap-y-16">
-            {allProducts?.map((product) => (
-              <ProductCard key={product._id} product={product} />
-            ))}
+            <Grid container>
+              {allProducts?.map((product) => (
+                <Grid item xs={12} sm={6} md={4} lg={3} sx={{display:"flex", justifyContent:"center",alignItems:"flex-end"}} >
+                  <ProductCard key={product._id} product={product} />
+                </Grid>
+              ))}
+            </Grid>
           </div>
         </section>
       )}
